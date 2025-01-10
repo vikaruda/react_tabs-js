@@ -1,33 +1,33 @@
 import classNames from 'classnames';
 
-export const Tabs = ({ tabs, selectedTabId, onTabSelected }) => {
+export const Tabs = ({ tabs, setSelectedTabId, onTabSelected }) => {
   return (
     <div data-cy="TabsComponent">
       <div className="tabs is-boxed">
         <ul>
-          {tabs.map(tabe => (
+          {tabs.map(tab => (
             <li
               className={classNames('no-active', {
-                'is-active': tabe.id === selectedTabId,
+                'is-active': tab.id === setSelectedTabId,
               })}
               data-cy="Tab"
             >
               <a
-                href={`#${tabe.id}`}
+                href={`#${tab.id}`}
                 data-cy="TabLink"
                 onClick={e => {
                   e.preventDefault(); // Prevent default anchor behavior
-                  onTabSelected(tabe); // Pass the selected tab to the callback
+                  onTabSelected(tab); // Pass the selected tab to the callback
                 }}
               >
-                {tabe.title}
+                {tab.title}
               </a>
             </li>
           ))}
         </ul>
       </div>
       <div className="block" data-cy="TabContent">
-        {tabs.find(tab => tab.id === selectedTabId)?.content}
+        {tabs.find(tab => tab.id === setSelectedTabId)?.content}
       </div>
     </div>
   );
